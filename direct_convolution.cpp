@@ -18,19 +18,24 @@ void generate_random_matrix(std::vector<T>& matrix, int rows, int cols, std::mt1
 // 适用于 main.cpp 和 direct_convolution.cpp
 void print_matrix(const std::vector<double>& matrix, int rows, int cols) {
     if (matrix.empty()) {
-        std::cout << "矩阵为空，无法打印。" << std::endl;
+        std::cout << std::endl;
         return;
     }
 
-    // 只使用一次 for 循环，将所有元素依次打印在同一行，以空格分隔
-    std::cout << std::fixed << std::setprecision(8); // 使用更高的精度
+    // 设置高精度和强制固定格式
+    std::cout << std::fixed << std::setprecision(8); 
     
-    // 打印矩阵的所有元素
+    // 打印矩阵的所有元素，并精确控制空格
     for (size_t i = 0; i < matrix.size(); ++i) {
-        // 不再使用 setw(10) 来避免格式化差异
-        std::cout << matrix[i] << " "; 
+        // 打印当前元素
+        std::cout << matrix[i];
+        
+        // 只有在不是最后一个元素时才打印空格
+        if (i < matrix.size() - 1) {
+            std::cout << " "; 
+        }
     }
-    std::cout << std::endl; // 所有元素在一行
+    std::cout << std::endl; // 结束这一行
 }
 
 // 直接卷积实现
@@ -90,7 +95,7 @@ int main() {
     std::mt19937 gen(seed);
     
     // 定义常见的 batchsize 和 ic 大小
-    std::vector<int> common_sizes = {1, 2, 4, 8, 16, 32, 64, 128};
+    std::vector<int> common_sizes = {1, 2, 4, 8, 16, 32, 64, 128, 256};
 
     // 从列表中随机选择 batchsize 和 ic
     std::uniform_int_distribution<> dist_index(0, common_sizes.size() - 1);

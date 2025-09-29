@@ -57,7 +57,6 @@ void im2col(const std::vector<double>& input, std::vector<double>& col,
 }
 
 // 封装 im2col + GEMM 卷积操作
-// 封装 im2col + GEMM 卷积操作
 void convolve_im2col_gemm(const std::vector<double>& input, const std::vector<double>& kernel, std::vector<double>& output,
                           int batchsize, int ic, int ih, int iw, int kc, int kh, int kw) {
     int oh = ih - kh + 1;
@@ -102,7 +101,6 @@ void convolve_im2col_gemm(const std::vector<double>& input, const std::vector<do
 
 // 打印矩阵的辅助函数
 // 适用于 main.cpp 和 direct_convolution.cpp
-// 适用于 main.cpp 和 direct_convolution.cpp
 void print_matrix(const std::vector<double>& matrix, int rows, int cols) {
     if (matrix.empty()) {
         std::cout << std::endl;
@@ -136,7 +134,7 @@ int main() {
     std::mt19937 gen(seed);
     
     // 定义常见的 batchsize 和 ic 大小
-    std::vector<int> common_sizes = {1, 2, 4, 8, 16, 32, 64, 128};
+    std::vector<int> common_sizes = {1, 2, 4, 8, 16, 32, 64, 128, 256};
 
     // 从列表中随机选择 batchsize 和 ic
     std::uniform_int_distribution<> dist_index(0, common_sizes.size() - 1);
